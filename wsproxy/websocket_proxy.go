@@ -272,6 +272,7 @@ func (p *Proxy) proxy(w http.ResponseWriter, r *http.Request) {
 			for {
 				select {
 				case <-ctx.Done():
+					time.Sleep(p.pongWait)
 					p.logger.Debugln("ping loop done")
 					return
 				case <-ticker.C:
